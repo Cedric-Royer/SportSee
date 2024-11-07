@@ -1,0 +1,16 @@
+.dashboard {
+    display: flex;
+    justify-content: space-evenly;
+
+    &__main{
+        width: 65%;
+        display: flex;
+        gap: 30px;
+        flex-direction: column;
+    }
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+}
