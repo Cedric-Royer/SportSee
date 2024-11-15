@@ -69,7 +69,7 @@ const DailyActivityChart = ({ activityData }) => {
   return (
     <div className='daily-activity-chart'>
       <span className='daily-activity-title'>Activité quotidienne</span>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height="95%">
         <BarChart  data={formattedData} margin={{ left: 43, right: 20, }} >
             <CartesianGrid strokeDasharray='1 3'  horizontal={true} vertical={false} />
             <XAxis 

@@ -1,10 +1,15 @@
+.nutrition-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .nutrition {
     display: flex;
     background-color: #FBFBFB;
     width: 258px;
     height: 124px;
     border-radius: 5px 0px 0px 0px;
-    margin-bottom: 39px;
     align-items: center;
 
     &__icon {
@@ -37,10 +42,12 @@
         padding-top: 4px; 
     }
 
-        @media (max-width: 1440px) {
-            width: 100%; 
-            min-width: 200px; 
+        @media (max-width: 1439px) {
+            width: 100px; 
             margin: 0 auto;
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
 
             &__icon {
                 width: 40px;
@@ -48,10 +55,26 @@
                 margin-left: 10%;
               }
 
-            .nutrition-data {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
+            &__count-container {
+                margin-left: 12px;
+                align-items: center;
+            
             }
+              &__count {
+                font-family: Roboto;
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 16px; 
+                color: #282D30;      
+            }
+
+            &__type {
+                font-size: 12px;
+                font-weight: 500;
+                line-height: 20px;   
+
+            }
+
         }
+
 }

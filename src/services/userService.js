@@ -7,6 +7,7 @@ export const formatUserData = (data) => {
       carbohydrateCount: data.data.keyData?.carbohydrateCount || 0,
       lipidCount: data.data.keyData?.lipidCount || 0,
     },
+    todayScore: data.data.todayScore || 0
   };
 };
 
@@ -46,7 +47,6 @@ export const getUserAverageSessions = async (userId) => {
       throw new Error("Erreur lors de la récupération des données de sessions moyennes de l'utilisateur");
     }
     const data = await response.json();
-    console.log(data);
 
     const daysMap = ["L", "M", "M", "J", "V", "S", "D"];
     const formattedSessions = data.data.sessions.map((session) => ({
@@ -68,13 +68,11 @@ export const getUserPerformance = async (userId) => {
       throw new Error("Erreur lors de la récupération des données de performance de l'utilisateur");
     }
     const data = await response.json();
-    console.log(data)
 
-    // Access the array within data.data.data for mapping
     return {
       userId: data.data.userId,
       kind: data.data.kind,
-      performanceData: data.data.data // specifically accessing the array here
+      performanceData: data.data.data 
     };
   } catch (error) {
     console.error("Erreur de connexion au serveur :", error);

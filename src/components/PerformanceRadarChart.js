@@ -18,13 +18,13 @@ const PerformanceRadarChart = ({ performanceData }) => {
   });
 
   return (
-    <div className="performance-radar-chart" style={{ width: '30%', height: 263 }}>
-      <ResponsiveContainer width="100%" height="100%">
-        <RadarChart outerRadius={90} data={orderedData}>
-          <PolarGrid radialLines={false} stroke="#FFFFFF" /> 
+    <div className="performance-radar-chart">
+      <ResponsiveContainer width="100%" height="100%" margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+        <RadarChart outerRadius={75} data={orderedData}>
+          <PolarGrid radialLines={false} stroke="#FFFFFF"  /> 
           <PolarAngleAxis 
             dataKey="kindName" 
-            tick={{ fill: '#FFFFFF', fontSize: 12, fontWeight: 500, fontFamily: 'Roboto' }} 
+            tick={{ fill: '#FFFFFF', fontSize: 12, fontWeight: 500, fontFamily: 'Roboto'}} 
          />
           <Radar 
             name="Performance" 

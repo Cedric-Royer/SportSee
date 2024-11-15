@@ -12,7 +12,7 @@ const NutritionData = ({ calorieCount, proteinCount, carbohydrateCount, lipidCou
     <div className="nutrition">
       <img src={calorieIcon} alt="Icône Calories" className="nutrition__icon" />
       <div className="nutrition__count-container">
-        <span className="nutrition__count">{calorieCount}kCal</span>
+        <span className="nutrition__count">{calorieCount/1000}kCal</span>
         <span className="nutrition__type">Calories</span>
       </div>
     </div>

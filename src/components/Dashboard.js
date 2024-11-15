@@ -6,6 +6,7 @@ import NutritionData from "./NutritionData";
 import DailyActivityChart from "./DailyActivityChart";  
 import AverageSessionChart from "./AverageSessionChart";
 import PerformanceRadarChart from "./PerformanceRadarChart";
+import AverageScoreChart from "./AverageScoreChart";
 import Layout from "./Layout";
 import "../styles/Dashboard.scss";
 
@@ -18,6 +19,7 @@ const Dashboard = () => {
     carbohydrateCount: 0,
     lipidCount: 0,
   });
+  const [todayScore, setTodayScore] = useState("");
   const [activityData, setActivityData] = useState([]);
   const [averageSessionData, setAverageSessionData] = useState([]);
   const [performanceData, setPerformanceData] = useState([]);
@@ -28,6 +30,8 @@ const Dashboard = () => {
         const userData = await getUserData(id);
         setFirstName(userData.firstName);
         setNutritionData(userData.nutritionData);
+        setTodayScore(userData.todayScore);
+        console.log(userData.todayScore)
         
         const activityResponse = await getUserActivity(id);
         setActivityData(activityResponse.data.sessions);
@@ -56,6 +60,7 @@ const Dashboard = () => {
           <div className="stats-container ">
             <AverageSessionChart sessionData={averageSessionData} />
             <PerformanceRadarChart performanceData={performanceData} />
+            <AverageScoreChart todayScore={todayScore} />
           </div>
 
         </div>

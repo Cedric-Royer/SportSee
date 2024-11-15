@@ -1,12 +1,17 @@
 .dashboard {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    margin: 0 3vw;
 
     &__main{
-        width: 65%;
+        width: 76%;
         display: flex;
-        gap: 30px;
+        gap: 4vh;
         flex-direction: column;
+        @media (max-width: 1439px) {
+            width: 86%;
+
+        }
     }
 }
 
@@ -14,3 +19,4 @@
     display: flex;
     justify-content: space-between;
 }
+
