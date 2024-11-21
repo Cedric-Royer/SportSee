@@ -1,0 +1,41 @@
+.average-session-chart {
+    background-color: #FF0000;
+    height: 263px;
+    position: relative;
+    border-radius: 5px;
+    width: 31%;
+}
+
+.average-session-title {
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    color: #FFFFFF;
+    opacity: 70%;
+    width: 148px;
+    height: 57px;
+    top: 29px;
+    left: 34px;
+    padding: 0px 1px 9px 0px;
+    position: absolute;
+}
+
+.tooltip{
+    background-color: #FFFFFF;
+    min-width: 45px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__text {
+        font-family: Roboto;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 24px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}

@@ -1,0 +1,32 @@
+.daily-activity-chart {
+    background-color:  #FBFBFB;
+    height: 35vh;
+    position: relative;
+}
+
+.daily-activity-title {
+    position: absolute;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    margin-top: 24px;
+    margin-left: 32px;
+    color: #20253A;
+}
+
+.tooltip__daily-activity {
+    background-color: #E60000;
+    color: #FFFFFF;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 85px;
+    min-width: 60px;
+    justify-content: space-evenly;
+}  
