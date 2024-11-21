@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/logo/logo.svg'; // Assurez-vous que le chemin est correct
+import logo from '../assets/logo/logo.svg'; 
 import meditationIcon from '../assets/nav-icons/meditation.svg';
 import swimmingIcon from '../assets/nav-icons/swimming.svg';
 import bikingIcon from '../assets/nav-icons/biking.svg';

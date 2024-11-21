@@ -1,3 +1,22 @@
+export const formatPerformanceData = (performanceData) => {
+  const kindMap = {
+    1: "Cardio",
+    2: "Energie",
+    3: "Endurance",
+    4: "Force",
+    5: "Vitesse",
+    6: "Intensité",
+  };
+
+  return [6, 5, 4, 3, 2, 1].map((kind) => {
+    const activity = performanceData.find((item) => item.kind === kind);
+    return {
+      value: activity ? activity.value : 0,
+      kindName: kindMap[kind],
+    };
+  });
+};
+
 export const formatUserData = (data) => {
   return {
     firstName: data.data.userInfos.firstName || '',
@@ -7,7 +26,7 @@ export const formatUserData = (data) => {
       carbohydrateCount: data.data.keyData?.carbohydrateCount || 0,
       lipidCount: data.data.keyData?.lipidCount || 0,
     },
-    todayScore: data.data.todayScore || 0
+    todayScore: data.data.todayScore || data.data.score || 0,
   };
 };
 
@@ -33,12 +52,27 @@ export const getUserActivity = async (userId) => {
       throw new Error("Erreur lors de la récupération des données d'activité de l'utilisateur");
     }
     const data = await response.json();
-    return data;
+
+    console.log("Données brutes reçues :", data.data.sessions);
+
+    const formattedSessions = data.data.sessions.map((session) => {
+      const date = new Date(session.day);
+      const day = date.getDate();
+      session.day = day
+      return {
+        day: day,
+        kilogram: session.kilogram,
+        calories: session.calories,
+      };
+    });
+
+    return { ...data, sessions: formattedSessions };
   } catch (error) {
     console.error("Erreur de connexion au serveur :", error);
     throw error;
   }
 };
+
 
 export const getUserAverageSessions = async (userId) => {
   try {
@@ -51,7 +85,7 @@ export const getUserAverageSessions = async (userId) => {
     const daysMap = ["L", "M", "M", "J", "V", "S", "D"];
     const formattedSessions = data.data.sessions.map((session) => ({
       ...session,
-      day: daysMap[session.day - 1],
+      day: daysMap[session.day - 1], 
     }));
 
     return { ...data, sessions: formattedSessions };
@@ -69,15 +103,15 @@ export const getUserPerformance = async (userId) => {
     }
     const data = await response.json();
 
+    const formattedPerformance = formatPerformanceData(data.data.data); 
+
     return {
       userId: data.data.userId,
       kind: data.data.kind,
-      performanceData: data.data.data 
+      performanceData: formattedPerformance,
     };
   } catch (error) {
     console.error("Erreur de connexion au serveur :", error);
     throw error;
   }
 };
-
-

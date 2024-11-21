@@ -1,78 +1,81 @@
-import React, { useEffect, useState } from "react";  
-import { useParams } from "react-router-dom"; 
-import { getUserData, getUserActivity, getUserAverageSessions, getUserPerformance } from "../services/userService";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { fetchAllUserData } from "../services/fetchUserData";
 import HelloMessage from "./HelloMessage";
 import NutritionData from "./NutritionData";
-import DailyActivityChart from "./DailyActivityChart";  
-import AverageSessionChart from "./AverageSessionChart";
-import PerformanceRadarChart from "./PerformanceRadarChart";
-import AverageScoreChart from "./AverageScoreChart";
+import { 
+  DailyActivityChart, 
+  AverageSessionChart, 
+  PerformanceRadarChart, 
+  AverageScoreChart 
+} from './Charts';
 import Layout from "./Layout";
 import "../styles/Dashboard.scss";
 
 const Dashboard = () => {
   const { id } = useParams();
-  const [firstName, setFirstName] = useState("");
-  const [nutritionData, setNutritionData] = useState({
-    calorieCount: 0,
-    proteinCount: 0,
-    carbohydrateCount: 0,
-    lipidCount: 0,
+  const [userData, setUserData] = useState({
+    firstName: "",
+    nutritionData: {
+      calorieCount: 0,
+      proteinCount: 0,
+      carbohydrateCount: 0,
+      lipidCount: 0,
+    },
+    todayScore: 0,
+    activityData: [],
+    averageSessionData: [],
+    performanceData: [],
   });
-  const [todayScore, setTodayScore] = useState("");
-  const [activityData, setActivityData] = useState([]);
-  const [averageSessionData, setAverageSessionData] = useState([]);
-  const [performanceData, setPerformanceData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchData = async () => {
       try {
-        const userData = await getUserData(id);
-        setFirstName(userData.firstName);
-        setNutritionData(userData.nutritionData);
-        setTodayScore(userData.todayScore);
-        console.log(userData.todayScore)
-        
-        const activityResponse = await getUserActivity(id);
-        setActivityData(activityResponse.data.sessions);
-        
-        const averageSessionsResponse = await getUserAverageSessions(id);
-        setAverageSessionData(averageSessionsResponse.sessions);
-
-        const performanceResponse = await getUserPerformance(id);
-        setPerformanceData(performanceResponse.performanceData);
-
-      } catch (error) {
-        console.error("Erreur lors de la récupération des données de l'utilisateur", error);
+        setLoading(true);
+        const data = await fetchAllUserData(id);
+        setUserData(data); 
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchUserData();
+    fetchData();
   }, [id]);
 
+  if (loading) {
+    return <p>Chargement des données...</p>;
+  }
+
+  if (error) {
+    return <p>Erreur : {error}</p>;
+  }
+
+  const { firstName, nutritionData, todayScore, activityData, averageSessionData, performanceData } = userData;
   return (
     <Layout>
-    <div>
-      <HelloMessage firstName={firstName} />
-      <div className="dashboard">
-        <div className="dashboard__main">        
-          <DailyActivityChart activityData={activityData} />
-          <div className="stats-container ">
-            <AverageSessionChart sessionData={averageSessionData} />
-            <PerformanceRadarChart performanceData={performanceData} />
-            <AverageScoreChart todayScore={todayScore} />
+      <div>
+        <HelloMessage firstName={firstName} />
+        <div className="dashboard">
+          <div className="dashboard__main">
+            <DailyActivityChart activityData={activityData} />
+            <div className="stats-container">
+              <AverageSessionChart sessionData={averageSessionData} />
+              <PerformanceRadarChart performanceData={performanceData} />
+              <AverageScoreChart todayScore={todayScore} />
+            </div>
           </div>
-
+          <NutritionData 
+            calorieCount={nutritionData.calorieCount} 
+            proteinCount={nutritionData.proteinCount} 
+            carbohydrateCount={nutritionData.carbohydrateCount} 
+            lipidCount={nutritionData.lipidCount} 
+          />
         </div>
-
-        <NutritionData 
-          calorieCount={nutritionData.calorieCount} 
-          proteinCount={nutritionData.proteinCount} 
-          carbohydrateCount={nutritionData.carbohydrateCount} 
-          lipidCount={nutritionData.lipidCount} 
-        />
       </div>
-    </div>
     </Layout>
   );
 };
