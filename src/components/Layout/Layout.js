@@ -1,10 +1,10 @@
 import React from 'react';
-import logo from '../assets/logo/logo.svg'; 
-import meditationIcon from '../assets/nav-icons/meditation.svg';
-import swimmingIcon from '../assets/nav-icons/swimming.svg';
-import bikingIcon from '../assets/nav-icons/biking.svg';
-import bodybuildingIcon from '../assets/nav-icons/bodybuilding.svg';
-import '../styles/Layout.scss';
+import logo from '../../assets/logo/logo.svg'; 
+import meditationIcon from '../../assets/nav-icons/meditation.svg';
+import swimmingIcon from '../../assets/nav-icons/swimming.svg';
+import bikingIcon from '../../assets/nav-icons/biking.svg';
+import bodybuildingIcon from '../../assets/nav-icons/bodybuilding.svg';
+import './Layout.scss';
 
 const Layout = ({ children }) => {
   return (

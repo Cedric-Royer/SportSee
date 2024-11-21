@@ -1,10 +1,10 @@
 import React from "react";
-import "../styles/NutritionData.scss";
+import "./NutritionData.scss";
 
-import calorieIcon from "../assets/nutrition-icons/calories.svg";
-import proteinIcon from "../assets/nutrition-icons/proteines.svg";
-import carbIcon from "../assets/nutrition-icons/glucides.svg";
-import lipidIcon from "../assets/nutrition-icons/lipides.svg";
+import calorieIcon from "../../assets/nutrition-icons/calories.svg";
+import proteinIcon from "../../assets/nutrition-icons/proteines.svg";
+import carbIcon from "../../assets/nutrition-icons/glucides.svg";
+import lipidIcon from "../../assets/nutrition-icons/lipides.svg";
 
 const NutritionData = ({ calorieCount, proteinCount, carbohydrateCount, lipidCount }) => (
   <div className="nutrition-data">

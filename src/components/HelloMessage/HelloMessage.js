@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/HelloMessage.scss";
+import "./HelloMessage.scss";
 
 const HelloMessage = ({ firstName }) => (
   <p className="hello-message">

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fetchAllUserData } from "../services/fetchUserData";
-import HelloMessage from "./HelloMessage";
-import NutritionData from "./NutritionData";
+import { fetchAllUserData } from "../../services/fetchUserData";
+import HelloMessage from "../HelloMessage/HelloMessage";
+import NutritionData from "../NutritionData/NutritionData";
 import { 
   DailyActivityChart, 
   AverageSessionChart, 
   PerformanceRadarChart, 
   AverageScoreChart 
-} from './Charts';
-import Layout from "./Layout";
-import "../styles/Dashboard.scss";
+} from '../Charts';
+import Layout from "../Layout/Layout";
+import "./Dashboard.scss";
 
 const Dashboard = () => {
   const { id } = useParams();
