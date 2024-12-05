@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   LineChart,
   Line,
@@ -11,6 +12,16 @@ import CustomTooltip from "./CustomTooltip";
 import CustomCursor from "./CustomCursor";
 import "./AverageSessionChart.scss";
 
+/**
+ * Composant affichant un graphique en ligne représentant la durée moyenne des sessions.
+ *
+ * @component
+ * @param {Object} props - Les props du composant.
+ * @param {Array} props.sessionData - Les données des sessions, un tableau d'objets contenant le jour et la durée des sessions.
+ * @param {string} props.sessionData[].day - Le jour de la session (ex : "L", "M", "M", "J", "V", "S", "D").
+ * @param {number} props.sessionData[].sessionLength - La durée moyenne de la session pour ce jour (en minutes).
+ * @returns {JSX.Element} - Le rendu du composant AverageSessionChart.
+ */
 const AverageSessionChart = ({ sessionData }) => {
   return (
     <div className="average-session-chart">
@@ -52,6 +63,15 @@ const AverageSessionChart = ({ sessionData }) => {
       </ResponsiveContainer>
     </div>
   );
+};
+
+AverageSessionChart.propTypes = {
+  sessionData: PropTypes.arrayOf(
+    PropTypes.shape({
+      day: PropTypes.string.isRequired,
+      sessionLength: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };
 
 export default AverageSessionChart;

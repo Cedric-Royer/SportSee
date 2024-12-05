@@ -1,7 +1,16 @@
 import React from "react"; 
+import PropTypes from 'prop-types';
 import { RadialBarChart, RadialBar, Legend, ResponsiveContainer } from "recharts";
 import "./AverageScoreChart.scss";
 
+/**
+ * Composant affichant un graphique radial représentant le score quotidien d'un utilisateur.
+ * 
+ * @component
+ * @param {Object} props - Les props du composant.
+ * @param {number} props.todayScore - Le score d'aujourd'hui, une valeur entre 0 et 1 (ex. 0.75 pour 75%).
+ * @returns {JSX.Element} - Le rendu du composant AverageScoreChart.
+ */
 const AverageScoreChart = ({ todayScore }) => {
   const data = [
     { name: "Score", value: todayScore * 100, fill: "#FF0000" },
@@ -61,6 +70,10 @@ const AverageScoreChart = ({ todayScore }) => {
       </div>
     </div>
   );
+};
+
+AverageScoreChart.propTypes = {
+  todayScore: PropTypes.number.isRequired,
 };
 
 export default AverageScoreChart;
