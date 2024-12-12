@@ -1,4 +1,5 @@
-import { getUserAverageSessions, getUserPerformance } from "./userService";
+import { getUserAverageSessions } from "./getUserAverageSessions";
+import { getUserPerformance } from "./getUserPerformance";
 import { getUserData } from "./getUserData";
 import { getUserActivity } from "./getUserActivity"
 
