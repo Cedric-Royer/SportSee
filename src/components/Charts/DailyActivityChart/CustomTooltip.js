@@ -25,12 +25,12 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 CustomTooltip.propTypes = {
-  active: PropTypes.bool.isRequired,
+  active: PropTypes.bool,
   payload: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.number,
     })
-  ).isRequired,
+  ),
 };
 
 export default CustomTooltip;

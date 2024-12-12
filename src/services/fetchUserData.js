@@ -1,4 +1,6 @@
-import { getUserData, getUserActivity, getUserAverageSessions, getUserPerformance } from "./userService";
+import { getUserAverageSessions, getUserPerformance } from "./userService";
+import { getUserData } from "./getUserData";
+import { getUserActivity } from "./getUserActivity"
 
 export const fetchAllUserData = async (id) => {
   try {

@@ -31,11 +31,11 @@ const CustomCursor = ({ points, width, height }) => {
 CustomCursor.propTypes = {
   points: PropTypes.arrayOf(
     PropTypes.shape({
-      x: PropTypes.number.isRequired,
+      x: PropTypes.number,
     })
-  ).isRequired,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
+  ),
+  width: PropTypes.number,
+  height: PropTypes.number,
 };
 
 export default CustomCursor;

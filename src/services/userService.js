@@ -17,63 +17,6 @@ export const formatPerformanceData = (performanceData) => {
   });
 };
 
-export const formatUserData = (data) => {
-  return {
-    firstName: data.data.userInfos.firstName || '',
-    nutritionData: {
-      calorieCount: data.data.keyData?.calorieCount || 0,
-      proteinCount: data.data.keyData?.proteinCount || 0,
-      carbohydrateCount: data.data.keyData?.carbohydrateCount || 0,
-      lipidCount: data.data.keyData?.lipidCount || 0,
-    },
-    todayScore: data.data.todayScore || data.data.score || 0,
-  };
-};
-
-export const getUserData = async (userId) => {
-  try {
-    const response = await fetch(`http://localhost:4000/user/${userId}`);
-    if (!response.ok) {
-      throw new Error("Erreur lors de la récupération des données de l'utilisateur");
-    }
-    const data = await response.json();
-    
-    return formatUserData(data);
-  } catch (error) {
-    console.error("Erreur de connexion au serveur :", error);
-    throw error;
-  }
-};
-
-export const getUserActivity = async (userId) => {
-  try {
-    const response = await fetch(`http://localhost:4000/user/${userId}/activity`);
-    if (!response.ok) {
-      throw new Error("Erreur lors de la récupération des données d'activité de l'utilisateur");
-    }
-    const data = await response.json();
-
-    console.log("Données brutes reçues :", data.data.sessions);
-
-    const formattedSessions = data.data.sessions.map((session) => {
-      const date = new Date(session.day);
-      const day = date.getDate();
-      session.day = day
-      return {
-        day: day,
-        kilogram: session.kilogram,
-        calories: session.calories,
-      };
-    });
-
-    return { ...data, sessions: formattedSessions };
-  } catch (error) {
-    console.error("Erreur de connexion au serveur :", error);
-    throw error;
-  }
-};
-
-
 export const getUserAverageSessions = async (userId) => {
   try {
     const response = await fetch(`http://localhost:4000/user/${userId}/average-sessions`);

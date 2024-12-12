@@ -9,7 +9,6 @@ import {
   PerformanceRadarChart, 
   AverageScoreChart 
 } from '../Charts';
-import Layout from "../Layout/Layout";
 import "./Dashboard.scss";
 
 const Dashboard = () => {
@@ -56,7 +55,6 @@ const Dashboard = () => {
 
   const { firstName, nutritionData, todayScore, activityData, averageSessionData, performanceData } = userData;
   return (
-    <Layout>
       <div>
         <HelloMessage firstName={firstName} />
         <div className="dashboard">
@@ -76,7 +74,6 @@ const Dashboard = () => {
           />
         </div>
       </div>
-    </Layout>
   );
 };
 

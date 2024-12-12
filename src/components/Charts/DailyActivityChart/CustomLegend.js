@@ -54,10 +54,10 @@ const CustomLegend = (props) => {
 CustomLegend.propTypes = {
   payload: PropTypes.arrayOf(
     PropTypes.shape({
-      color: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
+      color: PropTypes.string,
+      value: PropTypes.string,
     })
-  ).isRequired,
+  ),
 };
 
 export default CustomLegend;
