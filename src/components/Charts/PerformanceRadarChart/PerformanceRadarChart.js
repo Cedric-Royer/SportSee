@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Radar,
   RadarChart,
@@ -8,6 +9,14 @@ import {
 } from 'recharts';
 import './PerformanceRadarChart.scss';
 
+/**
+ * Composant affichant un graphique radar de performance.
+ *
+ * @param {Object[]} performanceData - Données de performance à afficher dans le radar.
+ * @param {string} performanceData[].kindName - Nom de la catégorie de performance (par exemple, "Cardio", "Force").
+ * @param {number} performanceData[].value - Valeur associée à cette catégorie de performance.
+ * @returns {JSX.Element} Le graphique radar de performance.
+ */
 const PerformanceRadarChart = ({ performanceData }) => {
   return (
     <div className="performance-radar-chart">
@@ -28,6 +37,15 @@ const PerformanceRadarChart = ({ performanceData }) => {
       </ResponsiveContainer>
     </div>
   );
+};
+
+PerformanceRadarChart.propTypes = {
+  performanceData: PropTypes.arrayOf(
+    PropTypes.shape({
+      kindName: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };
 
 export default PerformanceRadarChart;

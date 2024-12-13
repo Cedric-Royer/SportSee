@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   BarChart,
   Bar,
@@ -13,6 +14,15 @@ import CustomTooltip from './CustomTooltip';
 import CustomLegend from './CustomLegend';
 import './DailyActivityChart.scss';
 
+/**
+ * Composant affichant un graphique d'activité quotidienne.
+ *
+ * @param {Object[]} activityData - Données d'activité quotidienne.
+ * @param {string|number} activityData[].day - Jour de l'activité.
+ * @param {number} activityData[].kilogram - Poids (en kilogrammes) associé à l'activité.
+ * @param {number} activityData[].calories - Calories brûlées pendant l'activité.
+ * @returns {JSX.Element} Le graphique d'activité quotidienne.
+ */
 const DailyActivityChart = ({ activityData }) => {
   if (!activityData || activityData.length === 0) {
     return <div>Aucune donnée d'activité disponible.</div>;
@@ -69,6 +79,16 @@ const DailyActivityChart = ({ activityData }) => {
       </ResponsiveContainer>
     </div>
   );
+};
+
+DailyActivityChart.propTypes = {
+  activityData: PropTypes.arrayOf(
+    PropTypes.shape({
+      day: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      kilogram: PropTypes.number.isRequired,
+      calories: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };
 
 export default DailyActivityChart;

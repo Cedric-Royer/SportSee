@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fetchAllUserData } from "../../services/fetchUserData";
+import { fetchAllUserData } from "../../services/aggregateUserData";
 import HelloMessage from "../HelloMessage/HelloMessage";
 import NutritionData from "../NutritionData/NutritionData";
 import { 
@@ -11,6 +11,11 @@ import {
 } from '../Charts';
 import "./Dashboard.scss";
 
+/**
+ * Dashboard principal de l'utilisateur affichant ses données d'activité, de nutrition, et de performance.
+ *
+ * @returns {JSX.Element} Composant Dashboard.
+ */
 const Dashboard = () => {
   const { id } = useParams();
   const [userData, setUserData] = useState({
@@ -29,6 +34,9 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  /**
+   * Récupère et met à jour les données utilisateur depuis l'API.
+   */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,11 +54,11 @@ const Dashboard = () => {
   }, [id]);
 
   if (loading) {
-    return <p>Chargement des données...</p>;
+    return <p></p>;
   }
 
   if (error) {
-    return <p>Erreur : {error}</p>;
+    return <p>Erreur : utilisateur inconnu</p>;
   }
 
   const { firstName, nutritionData, todayScore, activityData, averageSessionData, performanceData } = userData;

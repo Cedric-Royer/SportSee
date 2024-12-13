@@ -4,6 +4,7 @@ export const getUserData = async (userId) => {
     try {
       const url = USE_MOCK_DATA ? `../mocks/user/${userId}.json` : `http://localhost:4000/user/${userId}`
       const response = await fetch(url);
+      
       if (!response.ok) {
         throw new Error("Erreur lors de la récupération des données de l'utilisateur");
       }
