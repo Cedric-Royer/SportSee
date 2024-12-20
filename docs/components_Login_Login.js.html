@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>components/Login/Login.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -37,31 +37,62 @@
 
 <div id="main">
     
+    <h1 class="page-title">components/Login/Login.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Login.scss";
 
+/**
+ * Composant de connexion pour l'utilisateur.
+ * Permet à l'utilisateur d'entrer son ID pour accéder à son profil.
+ *
+ * @component
+ *
+ * @returns {React.Element} Le rendu du composant Login.
+ */
 
-    <section class="package">
-        <h3> </h3>		
+const Login = () => {
+  const [userId, setUserId] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (userId) {
+      navigate(`/user/${userId}`);
+    }
+  };
+
+  return (
+    &lt;div className="login">
+      &lt;h1>Connexion&lt;/h1>
+      &lt;form onSubmit={handleLogin}>
+        &lt;label htmlFor="userId">Entrez votre ID utilisateur :&lt;/label>
+        &lt;input
+          type="text"
+          id="userId"
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
+          placeholder="ID utilisateur"
+        />
+        &lt;button type="submit">Se connecter&lt;/button>
+      &lt;/form>
+    &lt;/div>
+  );
+};
+
+export default Login;
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

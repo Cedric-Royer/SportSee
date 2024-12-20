@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>components/NutritionData/NutritionData.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -37,31 +37,88 @@
 
 <div id="main">
     
+    <h1 class="page-title">components/NutritionData/NutritionData.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import PropTypes from 'prop-types'; 
+import "./NutritionData.scss";
 
+import calorieIcon from "../../assets/nutrition-icons/calories.svg";
+import proteinIcon from "../../assets/nutrition-icons/proteines.svg";
+import carbIcon from "../../assets/nutrition-icons/glucides.svg";
+import lipidIcon from "../../assets/nutrition-icons/lipides.svg";
 
-    <section class="package">
-        <h3> </h3>		
+/**
+ * Composant affichant les données nutritionnelles de l'utilisateur.
+ * Affiche les quantités de calories, protéines, glucides et lipides sous forme d'icônes.
+ *
+ * @component
+ *
+ * @param {Object} props - Les propriétés passées au composant.
+ * @param {number} props.calorieCount - Le nombre de calories consommées. (en Kilo calories)
+ * @param {number} props.proteinCount - Le nombre de protéines consommées (en grammes).
+ * @param {number} props.carbohydrateCount - Le nombre de glucides consommés (en grammes).
+ * @param {number} props.lipidCount - Le nombre de lipides consommés (en grammes).
+ *
+ * @returns {React.Element} Le rendu du composant NutritionData.
+ */
+const NutritionData = ({ calorieCount, proteinCount, carbohydrateCount, lipidCount }) => (
+  &lt;div className="nutrition-data">
+    
+    &lt;div className="nutrition">
+      &lt;img src={calorieIcon} alt="Icône Calories" className="nutrition__icon" />
+      &lt;div className="nutrition__count-container">
+        &lt;span className="nutrition__count">{calorieCount/1000}kCal&lt;/span>
+        &lt;span className="nutrition__type">Calories&lt;/span>
+      &lt;/div>
+    &lt;/div>
+
+    &lt;div className="nutrition">
+      &lt;img src={proteinIcon} alt="Icône Protéines" className="nutrition__icon" />
+      &lt;div className="nutrition__count-container">
+        &lt;span className="nutrition__count">{proteinCount}g&lt;/span>
+        &lt;span className="nutrition__type">Protéines&lt;/span>
+      &lt;/div>
+    &lt;/div>
+
+    &lt;div className="nutrition">
+      &lt;img src={carbIcon} alt="Icône Glucides" className="nutrition__icon" />
+      &lt;div className="nutrition__count-container">
+        &lt;span className="nutrition__count">{carbohydrateCount}g&lt;/span>
+        &lt;span className="nutrition__type">Glucides&lt;/span>
+      &lt;/div>
+    &lt;/div>
+
+    &lt;div className="nutrition">
+      &lt;img src={lipidIcon} alt="Icône Lipides" className="nutrition__icon" />
+      &lt;div className="nutrition__count-container">
+        &lt;span className="nutrition__count">{lipidCount}g&lt;/span>
+        &lt;span className="nutrition__type">Lipides&lt;/span>
+      &lt;/div>
+    &lt;/div>
+  
+  &lt;/div>
+);
+
+NutritionData.propTypes = {
+  calorieCount: PropTypes.number.isRequired,
+  proteinCount: PropTypes.number.isRequired,
+  carbohydrateCount: PropTypes.number.isRequired,
+  lipidCount: PropTypes.number.isRequired
+};
+
+export default NutritionData;
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

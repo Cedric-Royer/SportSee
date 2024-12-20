@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>components/Charts/PerformanceRadarChart/PerformanceRadarChart.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -37,31 +37,70 @@
 
 <div id="main">
     
+    <h1 class="page-title">components/Charts/PerformanceRadarChart/PerformanceRadarChart.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  ResponsiveContainer,
+} from 'recharts';
+import './PerformanceRadarChart.scss';
 
+/**
+ * Composant affichant un graphique radar de performance.
+ *
+ * @param {Object[]} performanceData - Données de performance à afficher dans le radar.
+ * @param {string} performanceData[].kindName - Nom de la catégorie de performance (par exemple, "Cardio", "Force").
+ * @param {number} performanceData[].value - Valeur associée à cette catégorie de performance.
+ * @returns {JSX.Element} Le graphique radar de performance.
+ */
+const PerformanceRadarChart = ({ performanceData }) => {
+  return (
+    &lt;div className="performance-radar-chart">
+      &lt;ResponsiveContainer width="100%" height="100%">
+        &lt;RadarChart outerRadius={75} data={performanceData}>
+          &lt;PolarGrid radialLines={false} stroke="#FFFFFF" />
+          &lt;PolarAngleAxis
+            dataKey="kindName"
+            tick={{
+              fill: '#FFFFFF',
+              fontSize: 12,
+              fontWeight: 500,
+              fontFamily: 'Roboto',
+            }}
+          />
+          &lt;Radar name="Performance" dataKey="value" fill="#FF0101B2" />
+        &lt;/RadarChart>
+      &lt;/ResponsiveContainer>
+    &lt;/div>
+  );
+};
 
-    <section class="package">
-        <h3> </h3>		
+PerformanceRadarChart.propTypes = {
+  performanceData: PropTypes.arrayOf(
+    PropTypes.shape({
+      kindName: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+};
+
+export default PerformanceRadarChart;
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

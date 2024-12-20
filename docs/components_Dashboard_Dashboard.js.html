@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>components/Dashboard/Dashboard.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -37,31 +37,107 @@
 
 <div id="main">
     
+    <h1 class="page-title">components/Dashboard/Dashboard.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { fetchAllUserData } from "../../services/aggregateUserData";
+import HelloMessage from "../HelloMessage/HelloMessage";
+import NutritionData from "../NutritionData/NutritionData";
+import { 
+  DailyActivityChart, 
+  AverageSessionChart, 
+  PerformanceRadarChart, 
+  AverageScoreChart 
+} from '../Charts';
+import "./Dashboard.scss";
 
+/**
+ * Dashboard principal de l'utilisateur affichant ses données d'activité, de nutrition, et de performance.
+ *
+ * @returns {JSX.Element} Composant Dashboard.
+ */
+const Dashboard = () => {
+  const { id } = useParams();
+  const [userData, setUserData] = useState({
+    firstName: "",
+    nutritionData: {
+      calorieCount: 0,
+      proteinCount: 0,
+      carbohydrateCount: 0,
+      lipidCount: 0,
+    },
+    todayScore: 0,
+    activityData: [],
+    averageSessionData: [],
+    performanceData: [],
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    <section class="package">
-        <h3> </h3>		
+  /**
+   * Récupère et met à jour les données utilisateur depuis l'API.
+   */
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchAllUserData(id);
+        setUserData(data); 
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  if (loading) {
+    return &lt;p>&lt;/p>;
+  }
+
+  if (error) {
+    return &lt;p>Erreur : utilisateur inconnu&lt;/p>;
+  }
+
+  const { firstName, nutritionData, todayScore, activityData, averageSessionData, performanceData } = userData;
+  return (
+      &lt;div>
+        &lt;HelloMessage firstName={firstName} />
+        &lt;div className="dashboard">
+          &lt;div className="dashboard__main">
+            &lt;DailyActivityChart activityData={activityData} />
+            &lt;div className="stats-container">
+              &lt;AverageSessionChart sessionData={averageSessionData} />
+              &lt;PerformanceRadarChart performanceData={performanceData} />
+              &lt;AverageScoreChart todayScore={todayScore} />
+            &lt;/div>
+          &lt;/div>
+          &lt;NutritionData 
+            calorieCount={nutritionData.calorieCount} 
+            proteinCount={nutritionData.proteinCount} 
+            carbohydrateCount={nutritionData.carbohydrateCount} 
+            lipidCount={nutritionData.lipidCount} 
+          />
+        &lt;/div>
+      &lt;/div>
+  );
+};
+
+export default Dashboard;
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

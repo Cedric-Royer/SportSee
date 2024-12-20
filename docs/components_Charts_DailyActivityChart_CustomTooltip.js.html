@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>components/Charts/DailyActivityChart/CustomTooltip.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -37,31 +37,55 @@
 
 <div id="main">
     
+    <h1 class="page-title">components/Charts/DailyActivityChart/CustomTooltip.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import PropTypes from "prop-types";
 
+/**
+ * Composant personnalisé pour afficher un tooltip dans un graphique d'activité quotidienne.
+ *
+ * @component
+ * @alias DailyActivityChart/CustomTooltip
+ * @param {Object} props - Les props du composant.
+ * @param {boolean} props.active - Indique si le tooltip est actif.
+ * @param {Array} props.payload - Les données à afficher dans le tooltip.
+ * @param {Object} props.payload[].value - La valeur à afficher dans le tooltip.
+ * @returns {JSX.Element|null} - Un élément tooltip affichant les valeurs ou `null` si le tooltip n'est pas actif.
+ */
+const CustomTooltip = ({ active, payload }) => {
+  if (active &amp;&amp; payload &amp;&amp; payload.length) {
+    return (
+      &lt;div className="tooltip__daily-activity">
+        &lt;span>{`${payload[0].value}Kg`}&lt;/span>
+        &lt;span>{`${payload[1].value}Kcal`}&lt;/span>
+      &lt;/div>
+    );
+  }
+  return null;
+};
 
-    <section class="package">
-        <h3> </h3>		
+CustomTooltip.propTypes = {
+  active: PropTypes.bool,
+  payload: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.number,
+    })
+  ),
+};
+
+export default CustomTooltip;
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

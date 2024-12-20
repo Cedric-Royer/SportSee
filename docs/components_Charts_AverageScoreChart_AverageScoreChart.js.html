@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>components/Charts/AverageScoreChart/AverageScoreChart.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -37,31 +37,98 @@
 
 <div id="main">
     
+    <h1 class="page-title">components/Charts/AverageScoreChart/AverageScoreChart.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react"; 
+import PropTypes from 'prop-types';
+import { RadialBarChart, RadialBar, Legend, ResponsiveContainer } from "recharts";
+import "./AverageScoreChart.scss";
 
+/**
+ * Composant affichant un graphique radial représentant le score quotidien d'un utilisateur.
+ * 
+ * @component
+ * @param {Object} props - Les props du composant.
+ * @param {number} props.todayScore - Le score d'aujourd'hui, une valeur entre 0 et 1 (ex. 0.75 pour 75%).
+ * @returns {JSX.Element} - Le rendu du composant AverageScoreChart.
+ */
+const AverageScoreChart = ({ todayScore }) => {
+  const data = [
+    { name: "Score", value: todayScore * 100, fill: "#FF0000" },
+  ];
 
-    <section class="package">
-        <h3> </h3>		
+  const legendStyle = {
+    position: "absolute", 
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    textAlign: "center",
+    fontFamily: "Roboto",
+  };
+
+  return (
+    &lt;div className="average-score-chart">
+      &lt;span className="average-score-title">Score&lt;/span>
+      &lt;div className="radial-container">
+        &lt;ResponsiveContainer width="100%" height="100%">
+          &lt;RadialBarChart
+            cx="50%"
+            cy="50%"
+            innerRadius={80}
+            outerRadius={125}
+            barSize={10}
+            data={data}
+            startAngle={90} 
+            endAngle={90 + 360 * todayScore} 
+          >
+            &lt;RadialBar
+              minAngle={15}
+              clockWise
+              dataKey="value"
+              cornerRadius={10}
+              background={{ fill: "#F00000" }}
+            />
+            &lt;circle
+            cx="50%"
+            cy="50%"
+            r={75}
+            fill="#FFF"
+            />
+            &lt;Legend
+              content={() => (
+                &lt;div style={legendStyle}>
+                  &lt;span style={{color: "#282D30", fontSize: "26px", fontWeight: "700" }}>
+                    {`${(todayScore * 100).toFixed(0)}%`}
+                  &lt;/span>
+                  &lt;p style={{ color: "#74798C", fontSize: "16px", margin: 0 }}>
+                    de votre objectif
+                  &lt;/p>
+                &lt;/div>
+              )}
+            />
+          &lt;/RadialBarChart>
+        &lt;/ResponsiveContainer>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+AverageScoreChart.propTypes = {
+  todayScore: PropTypes.number.isRequired,
+};
+
+export default AverageScoreChart;
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>components/HelloMessage/HelloMessage.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -37,31 +37,42 @@
 
 <div id="main">
     
+    <h1 class="page-title">components/HelloMessage/HelloMessage.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import "./HelloMessage.scss";
 
+/**
+ * Composant qui affiche un message de bienvenue avec le prénom de l'utilisateur.
+ *
+ * @composant
+ * @param {Object} props - Les propriétés du composant.
+ * @param {string} props.firstName - Le prénom de l'utilisateur à afficher dans le message de bienvenue.
+ * @returns {JSX.Element} Un message de bienvenue personnalisé.
+ */
+const HelloMessage = ({ firstName }) => (
+  &lt;p className="hello-message">
+    &lt;span>Bonjour&lt;/span>
+    &lt;span className="hello-message__name">{firstName}&lt;/span>
+  &lt;/p>
+);
 
-    <section class="package">
-        <h3> </h3>		
+HelloMessage.propTypes = {
+  firstName: PropTypes.string.isRequired,
+};
+
+export default HelloMessage;
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 
