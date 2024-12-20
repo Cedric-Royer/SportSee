@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.scss";
 
+/**
+ * Composant de connexion pour l'utilisateur.
+ * Permet à l'utilisateur d'entrer son ID pour accéder à son profil.
+ *
+ * @component
+ *
+ * @returns {React.Element} Le rendu du composant Login.
+ */
+
 const Login = () => {
   const [userId, setUserId] = useState("");
   const navigate = useNavigate();

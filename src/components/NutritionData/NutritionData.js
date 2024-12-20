@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types'; 
 import "./NutritionData.scss";
 
 import calorieIcon from "../../assets/nutrition-icons/calories.svg";
@@ -6,6 +7,20 @@ import proteinIcon from "../../assets/nutrition-icons/proteines.svg";
 import carbIcon from "../../assets/nutrition-icons/glucides.svg";
 import lipidIcon from "../../assets/nutrition-icons/lipides.svg";
 
+/**
+ * Composant affichant les données nutritionnelles de l'utilisateur.
+ * Affiche les quantités de calories, protéines, glucides et lipides sous forme d'icônes.
+ *
+ * @component
+ *
+ * @param {Object} props - Les propriétés passées au composant.
+ * @param {number} props.calorieCount - Le nombre de calories consommées. (en Kilo calories)
+ * @param {number} props.proteinCount - Le nombre de protéines consommées (en grammes).
+ * @param {number} props.carbohydrateCount - Le nombre de glucides consommés (en grammes).
+ * @param {number} props.lipidCount - Le nombre de lipides consommés (en grammes).
+ *
+ * @returns {React.Element} Le rendu du composant NutritionData.
+ */
 const NutritionData = ({ calorieCount, proteinCount, carbohydrateCount, lipidCount }) => (
   <div className="nutrition-data">
     
@@ -43,5 +58,12 @@ const NutritionData = ({ calorieCount, proteinCount, carbohydrateCount, lipidCou
   
   </div>
 );
+
+NutritionData.propTypes = {
+  calorieCount: PropTypes.number.isRequired,
+  proteinCount: PropTypes.number.isRequired,
+  carbohydrateCount: PropTypes.number.isRequired,
+  lipidCount: PropTypes.number.isRequired
+};
 
 export default NutritionData;
