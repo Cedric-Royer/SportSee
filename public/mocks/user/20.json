@@ -1,0 +1,12 @@
+{
+    "data": {
+        "id": 20,
+        "userInfos": {
+            "firstName": "Paul",
+            "lastName": "Doe",
+            "age": 44
+        },
+        "keyData": {
+        }
+    }
+}
