@@ -16,7 +16,7 @@ export const getUserPerformance = async (userId) => {
   try {
       const url = USE_MOCK_DATA 
           ? `../mocks/performance/${userId}.json` 
-          : `http://localhost:4000/user/${userId}/performance`;
+          : `http://localhost:3000/user/${userId}/performance`;
       const response = await fetch(url);
       if (!response.ok) {
           throw new Error("Erreur lors de la récupération des données de performance de l'utilisateur");

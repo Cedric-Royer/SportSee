@@ -16,7 +16,7 @@ export const getUserActivity = async (userId) => {
   try {
     const url = USE_MOCK_DATA 
       ? `../mocks/activity/${userId}.json` 
-      : `http://localhost:4000/user/${userId}/activity`;
+      : `http://localhost:3000/user/${userId}/activity`;
     
     const response = await fetch(url);
       

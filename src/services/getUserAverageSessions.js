@@ -16,7 +16,7 @@ export const getUserAverageSessions = async (userId) => {
     try {
         const url = USE_MOCK_DATA 
             ? `../mocks/average-sessions/${userId}.json` 
-            : `http://localhost:4000/user/${userId}/average-sessions`;
+            : `http://localhost:3000/user/${userId}/average-sessions`;
         
         const response = await fetch(url);
         

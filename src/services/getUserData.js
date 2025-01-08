@@ -16,7 +16,7 @@ export const getUserData = async (userId) => {
     try {
         const url = USE_MOCK_DATA 
             ? `../mocks/user/${userId}.json` 
-            : `http://localhost:4000/user/${userId}`;
+            : `http://localhost:3000/user/${userId}`;
         
         const response = await fetch(url);
         
