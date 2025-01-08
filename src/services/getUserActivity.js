@@ -21,12 +21,7 @@ export const getUserActivity = async (userId) => {
     const response = await fetch(url);
       
     if (!response.ok) {
-      if (response.status === 404) {
-        console.warn("Aucune donnée d'activité trouvée pour cet utilisateur.");
-        return { sessions: [] }; 
-      } else {
-        throw new Error("Erreur lors de la récupération des données d'activité de l'utilisateur");
-      }
+      throw new Error("Erreur lors de la récupération des données d'activité de l'utilisateur");
     }
 
     const data = await response.json();
