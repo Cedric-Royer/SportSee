@@ -19,11 +19,7 @@ export const getUserData = async (userId) => {
             : `http://localhost:3000/user/${userId}`;
         
         const response = await fetch(url);
-        
-        if (!response.ok) {
-            throw new Error("Erreur lors de la récupération des données de l'utilisateur");
-        }
-        
+                
         const data = await response.json();
         return formatUserData(data);
     } catch (error) {
