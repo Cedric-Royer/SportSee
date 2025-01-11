@@ -1,7 +1,7 @@
-import { getUserAverageSessions } from "./getUserAverageSessions";
+import { getUserAverageSessions, formatAverageSessionsData } from "./getUserAverageSessions";
 import { getUserPerformance } from "./getUserPerformance";
-import { getUserData } from "./getUserData";
-import { getUserActivity } from "./getUserActivity";
+import { getUserData, formatUserData } from "./getUserData";
+import { getUserActivity, formatUserActivityData  } from "./getUserActivity";
 
 /**
  * Agrège toutes les données utilisateur nécessaires en effectuant des appels API ou en utilisant des données simulées.
@@ -29,19 +29,52 @@ export const aggregateUserData = async (id) => {
       getUserPerformance(id),
     ]);
 
-    const userData = responses[0].value;
-    const activityResponse = responses[1].status === "fulfilled" ? responses[1].value : { data: { sessions: [] } };
-    const averageSessionsResponse = responses[2].status === "fulfilled" ? responses[2].value : { sessions: [] };
-    const performanceResponse = responses[3].status === "fulfilled" ? responses[3].value : { performanceData: [] };
+    const allRejected = responses.every((res) => res.status === "rejected");
+    if (allRejected) {
+      throw new Error("Toutes les requêtes ont échoué.");
+    }
 
-    const activityData = activityResponse?.data?.sessions || [];
-    const averageSessionData = averageSessionsResponse?.sessions || [];
-    const performanceData = performanceResponse?.performanceData || [];
+    const userResponse = responses[0].value;
+    const activityResponse =  responses[1].value
+    const averageSessionsResponse = responses[2].value
+    const performanceResponse = responses[3].value
+
+    const userData = responses[0].status === "fulfilled" 
+    ? formatUserData(userResponse) 
+    : formatUserData({
+        data: {
+          userInfos: { firstName: "" },
+          keyData: {
+            calorieCount: 0,
+            proteinCount: 0,
+            carbohydrateCount: 0,
+            lipidCount: 0,
+          },
+          todayScore: 0,
+        },
+      });
+
+    const activityData = responses[1].status === "fulfilled"
+      ? formatUserActivityData(activityResponse)?.sessions
+      : [];
+
+    const averageSessionData = responses[2].status === "fulfilled"
+      ? formatAverageSessionsData(averageSessionsResponse?.data?.sessions)
+      : formatAverageSessionsData([]);
+    
+    const performanceData = performanceResponse
+      ? performanceResponse.performanceData
+      : [
+          { kindName: "Cardio", value: 0 },
+          { kindName: "Energie", value: 0 },
+          { kindName: "Endurance", value: 0 },
+          { kindName: "Force", value: 0 },
+          { kindName: "Vitesse", value: 0 },
+          { kindName: "Intensité", value: 0 },
+      ];
 
     return {
-      firstName: userData.firstName,
-      nutritionData: userData.nutritionData,
-      todayScore: userData.todayScore,
+      ...userData,
       activityData,
       averageSessionData,
       performanceData,

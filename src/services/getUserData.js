@@ -1,16 +1,14 @@
 import { USE_MOCK_DATA } from '../config';
 
 /**
- * Récupère les données d'un utilisateur.
+ * Récupère les données de sessions moyennes d'un utilisateur.
  * En fonction de la configuration `USE_MOCK_DATA`, la fonction utilise soit des données simulées (mock), 
- * soit fait une requête HTTP pour récupérer les données d'un utilisateur.
+ * soit effectue une requête HTTP pour récupérer les données des sessions moyennes de l'utilisateur.
  *
  * @async
- * @param {string} userId - L'ID de l'utilisateur pour lequel récupérer les données.
- * @returns {Promise<Object>} - Un objet contenant les informations de l'utilisateur formatées. 
- * Si une erreur survient, elle est propagée.
- *
- * @throws {Error} - Si une erreur survient lors de la récupération des données utilisateur, une exception est lancée.
+ * @param {string} userId - L'ID unique de l'utilisateur pour lequel les données doivent être récupérées.
+ * @returns {Promise<Object|null>} - Un objet formaté contenant les informations de l'utilisateur, 
+ * y compris le prénom, les données nutritionnelles, et le score du jour.
  */
 export const getUserData = async (userId) => {
     try {
@@ -21,10 +19,10 @@ export const getUserData = async (userId) => {
         const response = await fetch(url);
                 
         const data = await response.json();
-        return formatUserData(data);
+        return data;
     } catch (error) {
         console.error("Erreur lors de la récupération des données de l'utilisateur", error);
-        throw error;
+        throw error; 
     }
 };
 
@@ -37,7 +35,7 @@ export const getUserData = async (userId) => {
  * @returns {Object} - Les données formatées, incluant le prénom, les données nutritionnelles, 
  * et le score d'activité de l'utilisateur.
  */
-const formatUserData = (data) => {
+export const formatUserData = (data) => {
     return {
         firstName: data.data.userInfos.firstName || '',
         nutritionData: {
