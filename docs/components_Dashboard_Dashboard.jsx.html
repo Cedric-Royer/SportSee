@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>components/Dashboard/Dashboard.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AverageScoreChart">AverageScoreChart</a></li><li><a href="global.html#AverageSessionChart">AverageSessionChart</a></li><li><a href="global.html#AverageSessionChart/CustomCursor">AverageSessionChart/CustomCursor</a></li><li><a href="global.html#AverageSessionChart/CustomTooltip">AverageSessionChart/CustomTooltip</a></li><li><a href="global.html#DailyActivityChart">DailyActivityChart</a></li><li><a href="global.html#DailyActivityChart/CustomLegend">DailyActivityChart/CustomLegend</a></li><li><a href="global.html#DailyActivityChart/CustomTooltip">DailyActivityChart/CustomTooltip</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#ErrorPage">ErrorPage</a></li><li><a href="global.html#HelloMessage">HelloMessage</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#NutritionData">NutritionData</a></li><li><a href="global.html#PerformanceRadarChart">PerformanceRadarChart</a></li><li><a href="global.html#aggregateUserData">aggregateUserData</a></li><li><a href="global.html#formatAverageSessionsData">formatAverageSessionsData</a></li><li><a href="global.html#formatUserActivityData">formatUserActivityData</a></li><li><a href="global.html#formatUserData">formatUserData</a></li><li><a href="global.html#formatUserPerformanceData">formatUserPerformanceData</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserAverageSessions">getUserAverageSessions</a></li><li><a href="global.html#getUserData">getUserData</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/Dashboard/Dashboard.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { aggregateUserData } from "../../services/aggregateUserData";
+import HelloMessage from "../HelloMessage/HelloMessage";
+import NutritionData from "../NutritionData/NutritionData";
+import { 
+  DailyActivityChart, 
+  AverageSessionChart, 
+  PerformanceRadarChart, 
+  AverageScoreChart 
+} from '../Charts';
+import Loader from "../Loader/Loader";
+import ErrorPage from "../ErrorPage/ErrorPage";
+import "./Dashboard.scss";
+
+/**
+ * Dashboard principal de l'utilisateur affichant ses données d'activité, de nutrition, et de performance.
+ *
+ * @returns {JSX.Element} Composant Dashboard.
+ */
+const Dashboard = () => {
+  const { id } = useParams();
+  const [userData, setUserData] = useState({
+    firstName: "",
+    nutritionData: {
+      calorieCount: 0,
+      proteinCount: 0,
+      carbohydrateCount: 0,
+      lipidCount: 0,
+    },
+    todayScore: 0,
+    activityData: [],
+    averageSessionData: [],
+    performanceData: [],
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const data = await aggregateUserData(id);
+        setUserData(data); 
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  if (loading) {
+    return &lt;Loader />;
+  }
+
+  if (error) {
+    return &lt;ErrorPage />;
+  }
+
+  const { firstName, nutritionData, todayScore, activityData, averageSessionData, performanceData } = userData;
+  return (
+      &lt;div>
+        &lt;HelloMessage firstName={firstName} />
+        &lt;div className="dashboard">
+          &lt;div className="dashboard__main">
+            &lt;DailyActivityChart activityData={activityData} />
+            &lt;div className="stats-container">
+              &lt;AverageSessionChart sessionData={averageSessionData} />
+              &lt;PerformanceRadarChart performanceData={performanceData} />
+              &lt;AverageScoreChart todayScore={todayScore} />
+            &lt;/div>
+          &lt;/div>
+          &lt;NutritionData 
+            calorieCount={nutritionData.calorieCount} 
+            proteinCount={nutritionData.proteinCount} 
+            carbohydrateCount={nutritionData.carbohydrateCount} 
+            lipidCount={nutritionData.lipidCount} 
+          />
+        &lt;/div>
+      &lt;/div>
+  );
+};
+
+
+export default Dashboard;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Sun Jan 19 2025 15:45:37 GMT+0100 (heure normale d’Europe centrale) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

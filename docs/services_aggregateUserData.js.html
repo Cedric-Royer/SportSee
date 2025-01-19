@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>services/aggregateUserData.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AverageScoreChart">AverageScoreChart</a></li><li><a href="global.html#AverageSessionChart">AverageSessionChart</a></li><li><a href="global.html#AverageSessionChart/CustomCursor">AverageSessionChart/CustomCursor</a></li><li><a href="global.html#AverageSessionChart/CustomTooltip">AverageSessionChart/CustomTooltip</a></li><li><a href="global.html#DailyActivityChart">DailyActivityChart</a></li><li><a href="global.html#DailyActivityChart/CustomLegend">DailyActivityChart/CustomLegend</a></li><li><a href="global.html#DailyActivityChart/CustomTooltip">DailyActivityChart/CustomTooltip</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#ErrorPage">ErrorPage</a></li><li><a href="global.html#HelloMessage">HelloMessage</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#NutritionData">NutritionData</a></li><li><a href="global.html#PerformanceRadarChart">PerformanceRadarChart</a></li><li><a href="global.html#aggregateUserData">aggregateUserData</a></li><li><a href="global.html#formatAverageSessionsData">formatAverageSessionsData</a></li><li><a href="global.html#formatUserActivityData">formatUserActivityData</a></li><li><a href="global.html#formatUserData">formatUserData</a></li><li><a href="global.html#formatUserPerformanceData">formatUserPerformanceData</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserAverageSessions">getUserAverageSessions</a></li><li><a href="global.html#getUserData">getUserData</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">services/aggregateUserData.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { getUserAverageSessions, formatAverageSessionsData } from "./getUserAverageSessions";
+import { getUserPerformance } from "./getUserPerformance";
+import { getUserData, formatUserData } from "./getUserData";
+import { getUserActivity, formatUserActivityData  } from "./getUserActivity";
+
+/**
+ * Agrège toutes les données utilisateur nécessaires en effectuant des appels API ou en utilisant des données simulées.
+ * La fonction utilise `Promise.allSettled` pour gérer indépendamment les erreurs de chaque appel API.
+ * En cas d'échec d'un appel, des valeurs par défaut sont utilisées pour éviter l'échec global.
+ *
+ * @async
+ * @param {string} id - L'ID de l'utilisateur pour lequel récupérer et agréger les données.
+ * @returns {Promise&lt;Object>} - Un objet contenant les données agrégées de l'utilisateur, incluant :
+ *   - `firstName` : Prénom de l'utilisateur (string).
+ *   - `nutritionData` : Données nutritionnelles de l'utilisateur (object).
+ *   - `todayScore` : Score du jour de l'utilisateur (number).
+ *   - `activityData` : Données d'activité quotidienne (array).
+ *   - `averageSessionData` : Données des sessions moyennes de l'utilisateur (array).
+ *   - `performanceData` : Données de performance de l'utilisateur (array).
+ *
+ * @throws {Error} - Si une erreur inattendue survient lors de la récupération des données utilisateur (généralement lors de l'appel à `Promise.allSettled`).
+ */
+export const aggregateUserData = async (id) => {
+  try {
+    const responses = await Promise.allSettled([
+      getUserData(id),
+      getUserActivity(id),
+      getUserAverageSessions(id),
+      getUserPerformance(id),
+    ]);
+
+    const allRejected = responses.every((res) => res.status === "rejected");
+    if (allRejected) {
+      throw new Error("Toutes les requêtes ont échoué.");
+    }
+
+    const userResponse = responses[0].value;
+    const activityResponse =  responses[1].value
+    const averageSessionsResponse = responses[2].value
+    const performanceResponse = responses[3].value
+
+    const userData = responses[0].status === "fulfilled" 
+    ? formatUserData(userResponse) 
+    : formatUserData({
+        data: {
+          userInfos: { firstName: "" },
+          keyData: {
+            calorieCount: 0,
+            proteinCount: 0,
+            carbohydrateCount: 0,
+            lipidCount: 0,
+          },
+          todayScore: 0,
+        },
+      });
+
+    const activityData = responses[1].status === "fulfilled"
+      ? formatUserActivityData(activityResponse)?.sessions
+      : [];
+
+    const averageSessionData = responses[2].status === "fulfilled"
+      ? formatAverageSessionsData(averageSessionsResponse?.data?.sessions)
+      : formatAverageSessionsData([]);
+    
+    const performanceData = performanceResponse
+      ? performanceResponse.performanceData
+      : [
+          { kindName: "Cardio", value: 0 },
+          { kindName: "Energie", value: 0 },
+          { kindName: "Endurance", value: 0 },
+          { kindName: "Force", value: 0 },
+          { kindName: "Vitesse", value: 0 },
+          { kindName: "Intensité", value: 0 },
+      ];
+
+    return {
+      ...userData,
+      activityData,
+      averageSessionData,
+      performanceData,
+    };
+  } catch (error) {
+    console.error("Erreur inattendue lors de la récupération des données utilisateur", error);
+    throw error; 
+  }
+};
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Sun Jan 19 2025 15:45:37 GMT+0100 (heure normale d’Europe centrale) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

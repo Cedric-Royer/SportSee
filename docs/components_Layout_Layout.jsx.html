@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>components/Layout/Layout.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AverageScoreChart">AverageScoreChart</a></li><li><a href="global.html#AverageSessionChart">AverageSessionChart</a></li><li><a href="global.html#AverageSessionChart/CustomCursor">AverageSessionChart/CustomCursor</a></li><li><a href="global.html#AverageSessionChart/CustomTooltip">AverageSessionChart/CustomTooltip</a></li><li><a href="global.html#DailyActivityChart">DailyActivityChart</a></li><li><a href="global.html#DailyActivityChart/CustomLegend">DailyActivityChart/CustomLegend</a></li><li><a href="global.html#DailyActivityChart/CustomTooltip">DailyActivityChart/CustomTooltip</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#ErrorPage">ErrorPage</a></li><li><a href="global.html#HelloMessage">HelloMessage</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#NutritionData">NutritionData</a></li><li><a href="global.html#PerformanceRadarChart">PerformanceRadarChart</a></li><li><a href="global.html#aggregateUserData">aggregateUserData</a></li><li><a href="global.html#formatAverageSessionsData">formatAverageSessionsData</a></li><li><a href="global.html#formatUserActivityData">formatUserActivityData</a></li><li><a href="global.html#formatUserData">formatUserData</a></li><li><a href="global.html#formatUserPerformanceData">formatUserPerformanceData</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserAverageSessions">getUserAverageSessions</a></li><li><a href="global.html#getUserData">getUserData</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/Layout/Layout.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import PropTypes from 'prop-types';
+import logo from '../../assets/logo/logo.svg'; 
+import meditationIcon from '../../assets/nav-icons/meditation.svg';
+import swimmingIcon from '../../assets/nav-icons/swimming.svg';
+import bikingIcon from '../../assets/nav-icons/biking.svg';
+import bodybuildingIcon from '../../assets/nav-icons/bodybuilding.svg';
+import './Layout.scss';
+
+/**
+ * Composant de mise en page principale pour l'application.
+ * Fournit une structure de navigation et un espace pour le contenu principal.
+ *
+ * @param {Object} props - Les propriétés passées au composant.
+ * @param {ReactNode} props.children - Le contenu principal à afficher dans la section centrale.
+ *
+ * @returns {React.Element} Le rendu du composant Layout.
+ */
+const Layout = ({ children }) => {
+  return (
+    &lt;div className="layout">
+      &lt;div className="layout__header">
+        &lt;img className="layout__logo" src={logo} alt="SportSee icône" />
+        &lt;div className="layout__header__nav">
+            &lt;span>Accueil&lt;/span>
+            &lt;span>Profil&lt;/span>
+            &lt;span>Réglages&lt;/span>
+            &lt;span>Communauté&lt;/span>
+        &lt;/div>
+      &lt;/div>
+
+      &lt;div className="layout__content">
+        &lt;div className="layout__sidebar">
+          &lt;div className="layout__sidebar__nav">
+            &lt;img className="nav-icon" src={meditationIcon} alt="Méditation icône" />
+            &lt;img className="nav-icon" src={swimmingIcon} alt="Nage icône" />
+            &lt;img className="nav-icon" src={bikingIcon} alt="Vélo icône" />
+            &lt;img className="nav-icon" src={bodybuildingIcon} alt="Musculation icône" />
+          &lt;/div>
+          &lt;span className="layout__sidebar__copyright">Copyright, SportSee 2020&lt;/span>
+        &lt;/div>
+        
+        &lt;div className="layout__main">{children}&lt;/div>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+export default Layout;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Sun Jan 19 2025 15:45:37 GMT+0100 (heure normale d’Europe centrale) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>
