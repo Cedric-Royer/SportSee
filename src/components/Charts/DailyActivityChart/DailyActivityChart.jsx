@@ -17,6 +17,7 @@ import './DailyActivityChart.scss';
 /**
  * Composant affichant un graphique d'activité quotidienne.
  *
+ * @function
  * @param {Object[]} activityData - Données d'activité quotidienne.
  * @param {string|number} activityData[].day - Jour de l'activité.
  * @param {number} activityData[].kilogram - Poids (en kilogrammes) associé à l'activité.

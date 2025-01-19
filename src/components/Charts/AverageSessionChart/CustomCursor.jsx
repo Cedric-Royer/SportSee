@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 /**
  * Composant personnalisant le curseur pour un graphique.
  *
- * @component
+ * @function
  * @alias AverageSessionChart/CustomCursor
  * @param {Object} props - Les props du composant.
  * @param {Array} props.points - Les points de coordonnées pour le curseur.

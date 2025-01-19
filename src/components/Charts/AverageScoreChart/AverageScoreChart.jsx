@@ -6,7 +6,7 @@ import "./AverageScoreChart.scss";
 /**
  * Composant affichant un graphique radial représentant le score quotidien d'un utilisateur.
  * 
- * @component
+ * @function
  * @param {Object} props - Les props du composant.
  * @param {number} props.todayScore - Le score d'aujourd'hui, une valeur entre 0 et 1 (ex. 0.75 pour 75%).
  * @returns {JSX.Element} - Le rendu du composant AverageScoreChart.

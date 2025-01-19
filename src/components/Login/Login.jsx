@@ -6,7 +6,7 @@ import "./Login.scss";
  * Composant de connexion pour l'utilisateur.
  * Permet à l'utilisateur d'entrer son ID pour accéder à son profil.
  *
- * @component
+ * @function
  *
  * @returns {React.Element} Le rendu du composant Login.
  */

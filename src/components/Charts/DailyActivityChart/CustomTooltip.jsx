@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 /**
  * Composant personnalisé pour afficher un tooltip dans un graphique d'activité quotidienne.
  *
- * @component
+ * @function
  * @alias DailyActivityChart/CustomTooltip
  * @param {Object} props - Les props du composant.
  * @param {boolean} props.active - Indique si le tooltip est actif.

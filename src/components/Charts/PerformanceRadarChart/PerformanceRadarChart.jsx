@@ -12,6 +12,7 @@ import './PerformanceRadarChart.scss';
 /**
  * Composant affichant un graphique radar de performance.
  *
+ * @function
  * @param {Object[]} performanceData - Données de performance à afficher dans le radar.
  * @param {string} performanceData[].kindName - Nom de la catégorie de performance (par exemple, "Cardio", "Force").
  * @param {number} performanceData[].value - Valeur associée à cette catégorie de performance.

@@ -15,7 +15,7 @@ import "./AverageSessionChart.scss";
 /**
  * Composant affichant un graphique en ligne représentant la durée moyenne des sessions.
  *
- * @component
+ * @function
  * @param {Object} props - Les props du composant.
  * @param {Array} props.sessionData - Les données des sessions, un tableau d'objets contenant le jour et la durée des sessions.
  * @param {string} props.sessionData[].day - Le jour de la session (ex : "L", "M", "M", "J", "V", "S", "D").

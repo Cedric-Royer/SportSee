@@ -5,7 +5,7 @@ import "./HelloMessage.scss";
 /**
  * Composant qui affiche un message de bienvenue avec le prénom de l'utilisateur.
  *
- * @composant
+ * @function
  * @param {Object} props - Les propriétés du composant.
  * @param {string} props.firstName - Le prénom de l'utilisateur à afficher dans le message de bienvenue.
  * @returns {JSX.Element} Un message de bienvenue personnalisé.

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 /**
  * Composant personnalisé pour afficher une légende dans un graphique.
  *
- * @component
+ * @function
  * @alias DailyActivityChart/CustomLegend
  * @param {Object} props - Les props du composant.
  * @param {Array} props.payload - Les données à afficher dans la légende.

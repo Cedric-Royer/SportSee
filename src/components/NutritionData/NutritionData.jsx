@@ -11,7 +11,7 @@ import lipidIcon from "../../assets/nutrition-icons/lipides.svg";
  * Composant affichant les données nutritionnelles de l'utilisateur.
  * Affiche les quantités de calories, protéines, glucides et lipides sous forme d'icônes.
  *
- * @component
+ * @function
  *
  * @param {Object} props - Les propriétés passées au composant.
  * @param {number} props.calorieCount - Le nombre de calories consommées. (en Kilo calories)
