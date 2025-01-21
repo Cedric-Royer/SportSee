@@ -24,7 +24,7 @@ Pour les détails d'installation et d'utilisation, veuillez consulter le [README
 ## Installation
 1. Clonez le dépôt :
    ```bash
-   git clone <lien-du-repository>
+   git clone https://github.com/Cedric-Royer/SportSee.git
    ```
 2. Accédez au dossier du projet :
    ```bash
