@@ -1,4 +1,3 @@
-import React from "react";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Login from "./components/Login/Login";
 import ErrorPage from "./components/ErrorPage/ErrorPage";

@@ -1,4 +1,3 @@
-import React from "react"; 
 import PropTypes from 'prop-types';
 import { RadialBarChart, RadialBar, Legend, ResponsiveContainer } from "recharts";
 import "./AverageScoreChart.scss";

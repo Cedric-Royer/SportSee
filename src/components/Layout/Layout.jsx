@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import logo from '../../assets/logo/logo.svg'; 
 import meditationIcon from '../../assets/nav-icons/meditation.svg';
