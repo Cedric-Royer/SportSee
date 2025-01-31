@@ -81,6 +81,7 @@ src/
 ├── App.jsx            # Composant racine de l'application
 ├── main.jsx           # Point d'entrée de l'application
 └── Routes.jsx         # Routes de l'application
+└── config.js          # Variable pour switcher entre API et données mockées
 └── ...
 ```
 
