@@ -24,11 +24,11 @@ Pour les détails d'installation et d'utilisation, veuillez consulter le [README
 ## Installation
 1. Clonez le dépôt :
    ```bash
-   git clone https://github.com/Cedric-Royer/SportSee.git
+   git clone https://github.com/Cedric-Royer/SportSee-frontend.git
    ```
 2. Accédez au dossier du projet :
    ```bash
-   cd sportsee-frontend
+   cd SportSee-frontend
    ```
 3. Installez les dépendances :
    ```bash
@@ -80,6 +80,7 @@ src/
 ├── styles/            # Fichiers de style SCSS
 ├── App.jsx            # Composant racine de l'application
 ├── main.jsx           # Point d'entrée de l'application
+└── Routes.jsx         # Routes de l'application
 └── ...
 ```
 
