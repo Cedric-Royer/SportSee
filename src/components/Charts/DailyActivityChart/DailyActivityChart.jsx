@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import {
   BarChart,
   Bar,
@@ -24,12 +25,23 @@ import './DailyActivityChart.scss';
  * @returns {JSX.Element} Le graphique d'activité quotidienne.
  */
 const DailyActivityChart = ({ activityData }) => {
+  const [activeCoordinate, setActiveCoordinate] = useState(null);
+
+  const handleMouseMove = (e) => {
+    if (e.activeCoordinate) {
+      setActiveCoordinate(e.activeCoordinate);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setActiveCoordinate(null);
+  };
 
   return (
     <div className="daily-activity-chart">
       <span className="daily-activity-title">Activité quotidienne</span>
       <ResponsiveContainer width="100%" height="95%">
-        <BarChart data={activityData} margin={{ left: 43, right: 20 }}>
+        <BarChart data={activityData} margin={{ left: 43, right: 20 }} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
           <CartesianGrid strokeDasharray="1 3" horizontal={true} vertical={false} />
           <XAxis
             dataKey="day"
@@ -56,6 +68,17 @@ const DailyActivityChart = ({ activityData }) => {
           />
           <Tooltip content={<CustomTooltip />} />
           <Legend content={<CustomLegend />} verticalAlign="top" />
+          
+          {activeCoordinate && (
+            <rect
+              x={activeCoordinate.x - 25}
+              y={80}
+              width={50}
+              height={194}
+              fill="rgba(0, 0, 0, 0.1)"
+            />
+          )}
+          
           <Bar
             yAxisId="right"
             dataKey="kilogram"
